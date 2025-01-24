@@ -1,0 +1,122 @@
+
+
+/* Login and Register Container */
+.login-container, .register-container {
+  background-color: white;
+  padding: 1rem; 
+  border-radius: 5px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+  display: flex; /* Enable flexbox layout */
+  flex-direction: column; /* Set the direction to column */
+  justify-content: center; /* Center the items vertically within the container */
+  align-items: center; /* Center the items horizontally within the container */
+  width: 90%; 
+  max-width: 420px; 
+  margin: 0 auto; /* Center horizontally on the page */
+}
+
+/* Header */
+.login-container h2, .register-container h2 {
+  text-align: center;
+  color: #4CAF50; /* Matching header color from main theme */
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+/* Labels */
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* Input Fields */
+.form-group input {
+  width: 110%;
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  transition: border-color 0.3s ease;
+  background-color: #f9f9f9;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+  background-color: #fff;
+}
+
+/* Button */
+button {
+  width: 40%;
+  padding: 12px 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #205322;
+}
+
+/* Error Message */
+.error-message {
+  color: #ff0000;
+  text-align: left;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Registration Link */
+.login-container p, .register-container p {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #333;
+}
+
+.login-container a, .register-container a {
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.login-container a:hover, .register-container a:hover {
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+/* Hide helper text and error list as in main theme */
+.helptext {
+  display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .login-container, .register-container {
+      margin: 1rem;
+      padding: 1.8rem;
+  }
+
+  .login-container h2, .register-container h2 {
+      font-size: 1.6rem;
+  }
+}

@@ -1,0 +1,86 @@
+{% extends 'tournament/base.html' %}
+{% block content %}
+{% load static %}
+<main class="content">
+  <div class="profile-container">
+    <div class="profile-header">
+      <div class="player-info">
+        <h1><span class="highlight">{{ data.name }}</span></h1>
+        {% if data.is_captain %}
+        <i>Captain</i>
+        {% elif data.is_vicecaptain %}
+        <i>Vice Captain</i>
+        {% elif data.is_manager %}
+        <i>Manager</i>
+        {% endif %}
+      </div>
+      <div class="profile-image">
+        <img src="{{ data.image.url }}" alt="{{ data.name }}">
+      </div>
+      <!-- Right Side: Player Details -->
+      <div class="playerdetails">
+        <span>DOB</span>
+        <p>{{data.date_of_birth}}</p><br>
+        <span>Batting Style</span> 
+        <p> {{data.batting_style}}</p><br>
+          <span>Bowling Style</span>
+          <p> {{data.bowling_style}}</p><br>
+      </div>
+    </div>
+  </div>
+    <div class="tabs">
+      <button class="tab-button active" data-tab="profile">Profile</button>
+      <button class="tab-button" data-tab="stats">Stats</button>
+    </div>
+    <div class="tab-content active" id="profile">
+      <h2>Player Bio</h2>
+      <bio>{{data.description}}</bio>
+    </div>
+    <div class="tab-content hidden" id="stats">
+      <h3 class="stats-title">BIM CUP CAREER STATISTICS</h3>
+      <div class="stats-container">
+          <!-- Row 1 -->
+          <div class="stats-item">
+              <h4>{{data.fifties}} / {{data.hundreds}}</h4>
+              <p>50s/100s</p>
+          </div>
+          <div class="stats-item">
+              <h4>{{strike_rate }}</h4>
+              <p>Strike Rate</p>
+          </div>
+          <div class="stats-item">
+              <h4>{{average}}</h4>
+              <p>Batting Average</p>
+          </div>
+          <!-- Row 2 -->
+          <div class="stats-item">
+              <h4>{{data.match_played}}</h4>
+              <p>Matches Played</p>
+          </div>
+          <div class="stats-item">
+              <h4>{{data.highest_score}}</h4>
+              <p>Highest Score</p>
+          </div>
+          <div class="stats-item">
+              <h4>{{data.total_runs}}</h4>
+              <p>Runs Scored</p>
+          </div>
+          <!-- Row 3 -->
+          <div class="stats-item">
+              <h4>{{data.total_wickets}}</h4>
+              <p>Total Wickets</p>
+          </div>
+          <div class="stats-item">
+              <h4>{{data.overs_bowled}}</h4>
+              <p>Overs Bowled</p>
+          </div>
+          <div class="stats-item">
+              <h4>{{economy}}</h4>
+              <p>Economy</p>
+          </div>
+      </div>
+  </div>
+  </div>
+</main>
+{% endblock content %}
+

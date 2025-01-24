@@ -1,0 +1,29 @@
+{% extends 'tournament/base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="content">
+    <div class="sliderncc">
+        <div class="slides">
+          <div class="slidin">
+            <img src="{% static 'tournament/images/gallerya.jpg'%}" alt="Image 2">
+           </div>
+            <div class="slidin">
+                <img src="{% static 'tournament/images/players.jpg'%}" alt="Image 1">
+            </div>
+            <div class="slidin">
+                <img src="{% static 'tournament/images/galleryb.jpg'%}" alt="Image 3">
+            </div>
+            <div class="slidin">
+              <img src="{% static 'tournament/images/galleryc.jpg'%}" alt="Image 3">
+            </div>
+          <div class="slidin">
+            <img src="{% static 'tournament/images/galleryd.jpg'%}" alt="Image 3">
+          </div>
+        <div class="slidin">
+          <img src="{% static 'tournament/images/gallerye.jpg'%}" alt="Image 3">
+        </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}

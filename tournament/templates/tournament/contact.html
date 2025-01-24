@@ -1,0 +1,49 @@
+{% extends 'tournament/base.html' %}
+{% block content %}
+{% load static %}
+
+<main class="content">
+  <p>For Media Enquiries:media@ncc.com</p>
+  <div class="login-container">
+
+    <h2>Contact Us:</h2>
+    <form method="post" action="https://api.web3forms.com/submit" onsubmit="return validateForm();">
+      <input type="hidden" name="access_key" value="cff20389-6c94-4103-b8ad-692e9d9c96f1">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+      </div>
+
+
+      <div class="form-group">
+        <label for="subject">Subject:</label>
+        <select id="subject" name="subject">
+          <option value="">Select subject</option>
+          <option value="Inquiry">Inquiry</option>
+          <option value="Feedback">Feedback</option>
+          <option value="Complaint">Complaint</option>
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <label for="mobile">Mobile:</label>
+        <input type="tel" id="mobile" name="mobile">
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message:</label>
+        <textarea id="message" name="message"></textarea>
+      </div>
+      <div class="form-group"><button type="submit">Submit</button></div>
+
+    </form>
+  </div>
+</main>
+<script src="{% static 'tournament/js/contact_validate.js' %}"></script>
+
+{% endblock content %}

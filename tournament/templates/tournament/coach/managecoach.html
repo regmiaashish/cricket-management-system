@@ -1,0 +1,38 @@
+{% extends 'tournament/base.html' %}
+{% block content %}
+
+<main class="content">
+  <h1>Coach Details:</h1>
+<div class="table-container">
+  <table>
+      <thead>
+        <tr>
+          <th>SN</th>
+          <th>Name</th>
+          <th>DOB</th>
+          <th>Experience</th>
+          <th>Availability</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for coach in data %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{coach.name}}</td>
+          <td>{{ coach.date_of_birth|date:"Y-m-d" }}</td>
+          <td>{{ coach.experience_years}} years</td>
+          <td>{{ coach.is_available}}</td>
+          <td>
+            <a href="{% url 'edit_coach' coach.id %}">Edit</a>|
+            <a href="{% url 'delete_coach' coach.id %}">Delete</a>
+            <!-- <a href="{% url 'view_coach' coach.id %}">View</a> -->
+          </td>
+        </tr>   
+        {% endfor %}
+      </tbody>
+  </table>
+</div>
+</main>
+{% endblock content %}
+

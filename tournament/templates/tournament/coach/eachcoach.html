@@ -1,0 +1,38 @@
+{% extends 'tournament/base.html' %}
+{% block content %}
+{% load static %}
+<main class="content">
+  <div class="profile-container">
+    <div class="profile-header">
+      <div class="player-info">
+        <h1><span class="highlight">{{ data.name }}</span></h1>
+        {% if data.is_head_coach %}
+        <i>Head Coach</i>
+      {% else %}
+      <i>{{data.role}}</i>
+      {% endif %}
+      </div>
+      <div class="profile-image">
+        <img src="{{ data.image.url }}" alt="{{ data.name }}">
+      </div>
+      <!-- Right Side: Player Details -->
+      <div class="playerdetails">
+        
+        <span>DOB</span>
+        <p>{{data.date_of_birth}}</p><br>
+         
+        <span>Experience</span>
+         <p>{{data.experience_years}} Years</p><br>
+
+      </div>
+    </div>
+  </div>
+  
+    <div class="tab-content active" id="profile">
+      <h2>Coach Bio</h2>
+      <bio>{{data.description}}</bio>
+    </div>
+  </div>
+</main>
+{% endblock content %}
+

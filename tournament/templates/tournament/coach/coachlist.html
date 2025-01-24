@@ -1,0 +1,24 @@
+{% extends 'tournament/base.html' %}
+{% load static %}
+    {% block content %}
+    <main id="custom-grid" class="content">
+     {% for coach in  data %}
+        <div class="container">
+            <a href="{% url 'view_coach' coach.id %}">
+                <div class="player-box">
+                    {% if coach.image %}
+                     <img src="{{ coach.image.url }}" alt="Player Image" class="player-image">
+                    {% else %}
+    <img src="{% static 'tournament/images/logoncc.png'%}" alt="Default Player Image" class="player-image">
+                    {% endif %}
+                    <div class="player-info">
+                        <h3>{{coach.name}}</h3>
+                        <p>{{coach.role}}</p>
+                    </div>
+                </div>
+            </a>
+           
+        </div>
+        {% endfor %}
+    </main>
+    {% endblock content %}

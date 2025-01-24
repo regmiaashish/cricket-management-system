@@ -1,0 +1,33 @@
+{% extends 'tournament/base.html' %}
+{% block content %}
+
+<main class="content">
+  <h1>Player Details:</h1>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>SN</th>
+          <th>Player</th>
+          <th>DOB</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for player in data %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{player.name}}</td>
+          <td>{{ player.date_of_birth|date:"Y-m-d" }}</td>
+          <td>
+            <a href="{% url 'editplayer' player.id %}">Edit</a>|
+            <a href="{% url 'deleteplayer' player.id %}">Delete</a>
+            
+          </td>
+        </tr>  
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</main>
+{% endblock content %}

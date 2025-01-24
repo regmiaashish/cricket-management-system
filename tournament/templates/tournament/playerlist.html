@@ -1,0 +1,32 @@
+{% extends 'tournament/base.html' %}
+{% load static %}
+    {% block content %}
+    <main id="custom-grid" class="content">
+     {% for player in  data %}
+        <div class="container">
+            <a href="{% url 'view_player' player.id %}">
+                <div class="player-box">
+                    {% if player.image %}
+                     <img src="{{ player.image.url }}" alt="Player Image" class="player-image">
+                    {% else %}
+    <img src="{% static 'tournament/images/logoncc.png'%}" alt="Default Player Image" class="player-image">
+                    {% endif %}
+                    <div class="player-info">
+                        <h3>{{player.name}}</h3>
+                        {% if player.is_captain %}
+                        <p>Captain, {{player.role}}</p>
+                        {% elif player.is_vicecaptain %}
+                        <p>Vice Captain, {{player.role}}</p>
+                        {% elif player.is_manager %}
+                        <p>Manager</p>
+                        {% else %}
+                        <p>{{player.role}}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+           
+        </div>
+        {% endfor %}
+    </main>
+    {% endblock content %}

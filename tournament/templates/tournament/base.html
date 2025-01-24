@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Tournament</title>
+    <link rel="stylesheet" href="{% static 'tournament/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'tournament/css/player.css' %}">
+    <link rel="stylesheet" href="{% static 'tournament/css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'tournament/css/table.css' %}">
+    <link rel="stylesheet" href="{% static 'tournament/css/stats.css' %}">
+    <link rel="stylesheet" href="{% static 'tournament/css/loader.css' %}">
+    <link rel="stylesheet" href="{% static 'tournament/css/galleryslider.css' %}">
+
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <nav class="main-nav">
+            <a href="{% url 'homepage' %}" style="text-decoration: none;"><img
+                    src="{% static 'tournament/images/logoncc.png' %} " height="85px" width="90px"></a>
+            <ul>
+                <li><a href="{% url 'homepage' %}">Home</a></li>
+                <li>
+                    {% if user.is_staff %}
+                    <div class="dropdown">
+                        <a>Squad</a>
+                        <div class="dropdown-content">
+                            <ol class="custom-list">
+                                <li><a href="{% url 'playerlist' %}">Players</a></li><br>
+                                <li><a href="{% url 'manageplayer' %}">Manage</a></li><br>
+                                <li><a href="{% url 'add_player' %}">Add</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a>Coach</a>
+                        <div class="dropdown-content">  
+                            <ol class="custom-list">
+                                <li><a href="{% url 'coach' %}">Coach</a></li><br>
+                                <li><a href="{% url 'coachlist' %}">Manage</a></li><br>
+                                <li><a href="{% url 'add_coach' %}">Add</a></li><br>
+                            </ol>
+                        </div>
+                        {% else %}
+                <li><a href="{% url 'playerlist' %}">Players</a></li><br>
+                <li><a href="{% url 'coach' %}">Coach</a></li><br>
+                {% endif %}
+                </div>
+                </li>
+                <li><a href="#">Schedule</a></li>
+                <li><a href="#">About</a></li>
+                <div class="dropdown">
+                    <li><a>Gallery</a></li>
+                    <div class="dropdown-content">
+                        <ol class="custom-list">
+                            <li><a href="{% url 'gallery1' %}">2023</a></li><br>
+                            <li><a href="{% url 'gallery'%}">2024</a></li><br>
+                        </ol>
+                    </div>
+                </div>
+                <li><a href="{% url 'contact' %}">Reach Us</a></li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><img
+                            src="{% static 'tournament/images/logout1.png'%}" height="30px" width="30px"></a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+
+    <!-- Loader Section -->
+    <div id="preloader">
+        <img src="{% static 'tournament/images/proloader.gif' %}" alt="Loading...">
+    </div>
+
+    <!-- Main Content Section -->
+    {% block content %}
+    <main class="content">
+        <h2>Welcome {{user.username}}!!</h2>
+        <p>This is your one-stop platform for all NCC Cricket information.</p>
+        <div class="news">
+            <div class="heading-slider">
+                <p class="headline"> ⭐Top News<i class="wrap"></i>
+                </p>
+
+                <p>
+                    <a href="#" class="typewrite" data-period="200" data-type='[
+                    "2021🏆,2023🏆 and 2024🏆",
+                    "🥎 Nishan Bharti became the best bowler of BIM CUP 2024.",
+                    "🏏Aashish Regmi become the excellent debudant."   
+                    ]'>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </main>
+    {% endblock content %}
+
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2025 Cricket Tournament. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{% static 'tournament/js/loader.js' %}"></script>
+    <script src="{% static 'tournament/js/typewriter.js' %}"></script>
+    <script src="{% static 'tournament/js/stats.js' %}"></script>
+    <script src="{% static 'tournament/js/galleryslider.js' %}"></script>
+</body>
+
+</html>

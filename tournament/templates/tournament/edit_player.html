@@ -1,0 +1,18 @@
+{% extends 'tournament/base.html' %}
+{% block content %}
+<main class="content">
+<div class="login-container">
+    <h2>Edit Player</h2>
+    <form method = 'POST' enctype="multipart/form-data">
+        {% csrf_token %}
+       {{form.as_p}}
+        <div class="form-group">
+            <button type="submit">Edit</button>
+        </div>
+    </form>
+</div>
+
+           
+
+</main>
+{% endblock content %}

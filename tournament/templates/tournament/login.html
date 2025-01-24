@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/tournament/css/main.css"> 
+    <link rel="stylesheet" href="/static/tournament/css/form.css"> 
+    <link rel="stylesheet" href="/static/tournament/css/loader.css"> 
+</head>
+
+<body>
+
+
+
+        <div class="login-container">
+            <h2>Login</h2>
+            <form method="post">
+                {% csrf_token %}
+                
+                {% if form.non_field_errors %}
+                <div class="error-message">
+                    {{ form.non_field_errors }} 
+                </div>
+                {% endif %}
+                
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" value="{{ username }}"> 
+                    {% if form.username.errors %}
+                    <div class="error-message">
+                        {{ form.username.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password">
+                    {% if form.password.errors %}
+                    <div class="error-message">
+                        {{ form.password.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+            <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+        </div>
+        <div id="preloader">
+            <img src="{% static 'tournament/images/proloader.gif' %}" alt="Loading...">
+        </div>
+        
+</body>
+<script src="{% static 'tournament/js/loader.js' %}"></script>
+</html>

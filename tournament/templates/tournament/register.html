@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'tournament/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'tournament/css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'tournament/css/loader.css' %}">
+</head>
+<body>
+
+
+    <div class="register-container">
+        <h2>Register</h2>
+        <form method="post">
+            {% csrf_token %}
+            
+            <!-- Display non-field errors -->
+            {% if form.non_field_errors %}
+                <div class="error-message">
+                    {{ form.non_field_errors }}
+                </div>
+                {% endif %}
+                
+                <div class="form-group">
+                    <label for="id_username">Username:</label>
+                    <input type="text" name="username" id="id_username" value="{{ form.username.value|default:'' }}">
+                    {% if form.username.errors %}
+                    <div class="error-message">
+                        {{ form.username.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="id_password1">Password:</label>
+                    <input type="password" name="password1" id="id_password1">
+                {% if form.password1.errors %}
+                <div class="error-message">
+                        {{ form.password1.errors }}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="id_password2">Password confirmation:</label>
+                <input type="password" name="password2" id="id_password2">
+                {% if form.password2.errors %}
+                <div class="error-message">
+                        {{ form.password2.errors }}
+                    </div>
+                    {% endif %}
+            </div>
+            
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+    </div>
+    <div id="preloader">
+        <img src="{% static 'tournament/images/proloader.gif' %}" alt="Loading...">
+    </div>
+    
+</body>
+<script src="{% static 'tournament/js/loader.js' %}"></script>
+</html>
