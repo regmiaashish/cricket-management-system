@@ -21,10 +21,12 @@
       <div class="playerdetails">
         <span>DOB</span>
         <p>{{data.date_of_birth}}</p><br>
+        {% if data.is_manager == False %}
         <span>Batting Style</span> 
         <p> {{data.batting_style}}</p><br>
           <span>Bowling Style</span>
           <p> {{data.bowling_style}}</p><br>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -33,10 +35,15 @@
       <button class="tab-button" data-tab="stats">Stats</button>
     </div>
     <div class="tab-content active" id="profile">
+      {% if data.is_manager == False %}
       <h2>Player Bio</h2>
+      {% else %}
+      <h2>Manager Bio</h2>
+      {% endif %}
       <bio>{{data.description}}</bio>
     </div>
     <div class="tab-content hidden" id="stats">
+      {% if data.is_manager == False%}
       <h3 class="stats-title">BIM CUP CAREER STATISTICS</h3>
       <div class="stats-container">
           <!-- Row 1 -->
@@ -78,6 +85,7 @@
               <h4>{{economy}}</h4>
               <p>Economy</p>
           </div>
+          {% endif %}
       </div>
   </div>
   </div>

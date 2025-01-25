@@ -132,6 +132,7 @@ Content Styles with background image
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);  
     color: var(--text-dark);  
     text-align: center;
+    flex: 1;
 }  
 
 .content h2 {  
@@ -151,13 +152,11 @@ Footer Styles
     background-color: rgb(2, 53, 2);  
     color: var(--white);  
     text-align: center;  
-    padding-top: 100;  
     position: relative;  
-    margin-top: 0%;
-    width: 100%;  
     align-items: center;  
     justify-content: center;  
-} 
+    height: max-content;
+}
 
 /* ==========================================================================  
 News Headlines
