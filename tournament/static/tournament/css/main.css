@@ -152,12 +152,12 @@ Footer Styles
     color: var(--white);  
     text-align: center;  
     padding-top: 100;  
-    position: fixed;  
+    position: relative;  
     margin-top: 0%;
     width: 100%;  
     align-items: center;  
     justify-content: center;  
-}  
+} 
 
 /* ==========================================================================  
 News Headlines
@@ -226,8 +226,5 @@ News Headlines
 }
 
 /* Logo Section */  
-.logo {
-    flex-shrink: 0; /* Prevent logo from shrinking */
-}
 
   
