@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const apiKey = '13e8ddd1992b43259053cc0f7f706cc7';  // Replace with your News API key
+//   const apiKey = '13e8ddd1992b43259053cc0f7f706cc7';  // Replace with your News API key
   const apiUrl = `https://newsapi.org/v2/top-headlines?category=sports&q=cricket&apiKey=${apiKey}`;
 
   fetch(apiUrl)

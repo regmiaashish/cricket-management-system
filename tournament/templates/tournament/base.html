@@ -21,7 +21,7 @@
     <header class="header">
         <nav class="main-nav">
             <a href="{% url 'homepage' %}" style="text-decoration: none;"><img
-                    src="{% static 'tournament/images/logoncc.png' %} " height="85px" width="90px"></a>
+                    src="{% static 'tournament/images/newlogo.png' %} " height="85px" width="90px"></a>
             <ul>
                 <li><a href="{% url 'homepage' %}">Home</a></li>
                 <li>
@@ -66,7 +66,7 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><img
-                            src="{% static 'tournament/images/logout1.png'%}" height="30px" width="30px"></a></li>
+                            src="{% static 'tournament/images/logout1.png'%}" height="28px" width="30px"></a></li>
             </ul>
         </nav>
     </header>
@@ -80,24 +80,35 @@
 
     <!-- Main Content Section -->
     {% block content %}
-    <main class="content">
-        <h2>Welcome {{user.username}}!!</h2>
-        <p>This is your one-stop platform for all NCC Cricket information.</p>
-        <div class="news">
-            <div class="heading-slider">
-                <p class="headline"> ⭐Top News<i class="wrap"></i>
-                </p>
-
-                <p>
-                    <a href="#" class="typewrite" data-period="200" data-type='[
-                    "2021🏆,2023🏆 and 2024🏆",
-                    "🥎 Nishan Bharti became the best bowler of BIM CUP 2024.",
-                    "🏏Aashish Regmi become the excellent debudant."   
-                    ]'>
+    <main class="content">  
+        <h1>
+            <span class="red">W</span>
+            <span class="white">E</span>
+            <span class="blue">L</span>
+            <span class="red">C</span>
+            <span class="white">O</span>
+            <span class="blue">M</span>
+            <span class="red">E</span>
+          </h1>
+         <h1 class="animate">If you <span style="color:rgb(146, 10, 10)"> Don't</span> <br>
+            <p> <span style="color: rgb(3, 253, 49);">Practice</span> ,</p>
+            You <span style="color: rgb(146, 10, 10);">Don't</span><br> Deserve to <span style="color: rgb(38, 35, 176);">Win</span> .</h1>
+            <div class="news">
+                <div class="heading-slider">
+                    <p class="headline"> ⭐Top News<i class="wrap"></i>
+                    </p>
+                    
+                    <p>
+                        <a href="#" class="typewrite" data-period="200" data-type='[
+                        "2021🏆,2023🏆 and 2024🏆",
+                        "🥎 Nishan Bharti became the best bowler of BIM CUP 2024.",
+                        "🏏Aashish Regmi become the excellent debudant."   
+                        ]'>
                     </a>
-                </p>
+                    </p>
+                </div>
             </div>
-        </div>
+
     </main>
     {% endblock content %}
 
