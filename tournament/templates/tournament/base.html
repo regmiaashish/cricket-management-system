@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{% static 'tournament/css/stats.css' %}">
     <link rel="stylesheet" href="{% static 'tournament/css/loader.css' %}">
     <link rel="stylesheet" href="{% static 'tournament/css/galleryslider.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 
 </head>
 
@@ -81,33 +83,36 @@
     <!-- Main Content Section -->
     {% block content %}
     <main class="content">  
-        <h1>
-            <span class="red">W</span>
-            <span class="white">E</span>
-            <span class="blue">L</span>
-            <span class="red">C</span>
-            <span class="white">O</span>
-            <span class="blue">M</span>
-            <span class="red">E</span>
-          </h1>
-         <h1 class="animate">If you <span style="color:rgb(146, 10, 10)"> Don't</span> <br>
-            <p> <span style="color: rgb(3, 253, 49);">Practice</span> ,</p>
-            You <span style="color: rgb(146, 10, 10);">Don't</span><br> Deserve to <span style="color: rgb(38, 35, 176);">Win</span> .</h1>
-            <div class="news">
-                <div class="heading-slider">
-                    <p class="headline"> ⭐Top News<i class="wrap"></i>
-                    </p>
-                    
-                    <p>
-                        <a href="#" class="typewrite" data-period="200" data-type='[
-                        "2021🏆,2023🏆 and 2024🏆",
-                        "🥎 Nishan Bharti became the best bowler of BIM CUP 2024.",
-                        "🏏Aashish Regmi become the excellent debudant."   
-                        ]'>
-                    </a>
+     <div class="backimage"><br>
+
+         <h1>
+             <span class="red">W</span>
+             <span class="white">E</span>
+             <span class="blue">L</span>
+             <span class="red">C</span>
+             <span class="white">O</span>
+             <span class="blue">M</span>
+             <span class="red">E</span>
+            </h1>
+            <h1 class="animate">If you <span style="color:rgb(146, 10, 10)"> Don't</span> <br>
+                <p> <span style="color: rgb(3, 253, 49);">Practice</span> ,</p>
+                You <span style="color: rgb(146, 10, 10);">Don't</span><br> Deserve to <span style="color: rgb(38, 35, 176);">Win</span> .</h1>
+                <div class="news">
+                    <div class="heading-slider">
+                        <p class="headline"> ⭐Top News<i class="wrap"></i>
+                        </p>
+                        
+                        <p>
+                            <a href="#" class="typewrite" data-period="200" data-type='[
+                            "2021🏆,2023🏆 and 2024🏆",
+                            "🥎 Nishan Bharti became the best bowler of BIM CUP 2024.",
+                            "🏏Aashish Regmi become the excellent debudant."   
+                            ]'>
+                        </a>
                     </p>
                 </div>
             </div>
+        </div>
 
     </main>
     {% endblock content %}
@@ -116,6 +121,12 @@
     <!-- Footer Section -->
     <footer class="footer">
         <p>&copy; 2025 Cricket Tournament. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/regs.exe" class="icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/aashish-regmi-228868309/" class="icon linkedin" aria-label="Linkedin"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="icon youtube" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="icon pinterest" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+        </div>
     </footer>
 
     <!-- JavaScript -->

@@ -129,17 +129,21 @@ Content Styles with background image
     padding: var(--content-padding);  
     max-width: 1200px;  
     border-radius: 8px;  
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);  
+    /* box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);   */
     color: var(--text-dark);  
     text-align: center;
     flex: 1;
+
+
+}  
+
+.backimage{
     background-image: url('../images/background.png'); /* Replace with the correct path */
     background-size: cover; /* Makes the image cover the entire section */
     background-position: center; /* Centers the image */
     background-repeat: no-repeat;
-
-}  
-
+    border-radius: 5px;
+}
 
 
 
@@ -158,15 +162,46 @@ Content Styles with background image
 /* ==========================================================================  
 Footer Styles  
 ========================================================================== */  
-.footer {  
+.footer {
     background-color: rgb(2, 53, 2);  
     color: var(--white);  
     text-align: center;  
     position: relative;  
     align-items: center;  
     justify-content: center;  
-    height: max-content;
+    height: max-content;  
+    padding: 20px;
 }
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-icons .icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--white);
+    border-radius: 50%;
+    color: var(--white);
+    font-size: 18px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-icons .icon:hover {
+    background-color: var(--white);
+    color: rgb(2, 53, 2);
+}
+
+/* FontAwesome Integration */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
 
 /* ==========================================================================  
 News Headlines
