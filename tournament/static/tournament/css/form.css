@@ -1,5 +1,7 @@
 
-
+#signup{
+  background-color: rgb(8, 122, 8);
+}
 /* Login and Register Container */
 .login-container, .register-container {
   background-color: white;

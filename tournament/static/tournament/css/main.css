@@ -129,7 +129,7 @@ Content Styles with background image
     padding: var(--content-padding);  
     max-width: 1200px;  
     border-radius: 8px;  
-    /* box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);   */
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);  
     color: var(--text-dark);  
     text-align: center;
     flex: 1;
@@ -138,11 +138,12 @@ Content Styles with background image
 }  
 
 .backimage{
-    background-image: url('../images/background.png'); /* Replace with the correct path */
+    background-image: url('../images/back.png'); /* Replace with the correct path */
     background-size: cover; /* Makes the image cover the entire section */
     background-position: center; /* Centers the image */
     background-repeat: no-repeat;
     border-radius: 5px;
+    
 }
 
 
@@ -217,12 +218,13 @@ News Headlines
 .heading-slider .headline {  
     font-weight: normal;  
     font-size: 1.2rem;  
-    color: rgb(161, 13, 13);  
+    color: rgb(227, 234, 7);  
+    background-color: #0d14d7;
 }  
 
 .typewrite {  
-    font-size: 0.8rem;  
-    color: black;  
+    font-size: 1rem;  
+    color: rgb(106, 7, 7);  
     font-weight: normal;  
     text-decoration: none;  
 }  
@@ -289,8 +291,9 @@ h1.animate {
     opacity: 0; /* Ensures the content starts hidden */
     animation-fill-mode: forwards; /* Keeps the animation state after it ends */
     font-family: Arial, sans-serif;
-    text-align: center;
-    margin-top: 50px;
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 20px;
 }
 
 /* Keyframes for sliding in from the right */
