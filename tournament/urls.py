@@ -1,6 +1,6 @@
 from django.urls import path
 # from django.contrib.auth import views as auth_views
-from tournament.views import register_view, logout_view, login_view, newview, playerlist, add_player, view_player, edit_player, manage_player,delete_player, coachview, coachlist, gallery1, gallery2, add_coach, edit_coach, delete_coach, view_coach, reachus
+from tournament.views import register_view, logout_view, login_view, newview, playerlist, add_player, view_player, edit_player, manage_player,delete_player, coachview, coachlist, gallery1, gallery2, add_coach, edit_coach, delete_coach, view_coach, reachus, aboutus
 
 urlpatterns = [
     path('login/', login_view, name='login'),
@@ -22,6 +22,10 @@ urlpatterns = [
      
      #for inquiry and contact
      path('contact/', reachus, name='contact'),
+     
+     #For about us
+     path('aboutus/', aboutus, name='about'),
+     
 
      #crud for coach   
      path('coach/', coachview, name='coachlist'),

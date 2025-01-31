@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cricket Tournament</title>
+    <title>CricNCC</title>
     <link rel="stylesheet" href="{% static 'tournament/css/main.css' %}">
     <link rel="stylesheet" href="{% static 'tournament/css/player.css' %}">
     <link rel="stylesheet" href="{% static 'tournament/css/form.css' %}">
@@ -22,8 +22,8 @@
     <!-- Header Section -->
     <header class="header">
         <nav class="main-nav">
-            <a href="{% url 'homepage' %}" style="text-decoration: none;"><img
-                    src="{% static 'tournament/images/newlogo.png' %} " height="85px" width="90px"></a>
+            <a href="{% url 'homepage' %}" style="text-decoration: none;" class="logoncc">
+                <img src="{% static 'tournament/images/newlogo.png' %} " id="team_logo"></a>
             <ul>
                 <li><a href="{% url 'homepage' %}">Home</a></li>
                 <li>
@@ -54,7 +54,7 @@
                 </div>
                 </li>
                 <li><a href="#">Schedule</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
                 <div class="dropdown">
                     <li><a>Gallery</a></li>
                     <div class="dropdown-content">
@@ -84,16 +84,8 @@
     {% block content %}
     <main class="content">  
      <div class="backimage"><br>
+        <i class="tagline"> <span>Bound by Cricket, Fueled by Glory!</span><br>~ CricNCC</i>
 
-         <h1>
-             <span class="red">W</span>
-             <span class="white">E</span>
-             <span class="blue">L</span>
-             <span class="red">C</span>
-             <span class="white">O</span>
-             <span class="blue">M</span>
-             <span class="red">E</span>
-            </h1>
             <h1 class="animate">If you <span style="color:rgb(195, 8, 8)"> Don't</span> <br>
                 <p> <span style="color: rgb(12, 121, 32);">Practice</span> ,</p>
                 You <span style="color: rgb(195, 8, 8);">Don't</span><br> Deserve to <span style="color: rgb(38, 35, 176);">Win</span> .</h1>

@@ -1,0 +1,69 @@
+{% extends 'tournament/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'tournament/css/about.css' %}">
+<main class="content">
+    <section class="about-us">
+        <h2 style="color: rgb(3, 76, 3);">About Us</h2>
+        <div id="content">
+            <div class="text">
+                <p>Nepal Commerce Campus (NCC) participates in BIM Cricket Tournament in Nepal. Established in 2018, NCC is known for its competitive spirit and has consistently produced talented cricketers. </p>
+                <p>NCC has consistently been a strong contender in domestic tournaments, showcasing their skills and determination on the field.</p>
+                <p>The team is currently coached by Basanta Khatri and is captained by Manjeet Thapaliya.</p>
+            </div>
+            <img src="{% static 'tournament/images/gallerya.jpg' %}" a class="team-image">
+        </div>
+    </section>
+
+    <section class="about-us">
+        <h1 style="color: rgb(3, 76, 3);">Our Vision</h1>
+        <div id="content">
+            <img src="{% static 'tournament/images/visions.jpg' %}" alt="Our Vision" class="team-image">
+            <div class="text">
+                <p>To be a leading force in Nepalese cricket, inspiring and empowering young players within the community and beyond by maintaining the brotherhood. We strive to create a legacy of excellence, teamwork, and sportsmanship, while providing unforgettable cricketing experiences for our players, fans, and the entire nation.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="mission">
+        <h2 style="color: rgb(3, 76, 3);">Our Mission</h2>
+        <div id="content">
+            <div class="text">
+                <p>To be the flag bearer of cricketing excellence within Nepal, inspiring and empowering young players through consistent hard work, dedication, and a strong team spirit. We aim to achieve sustained success in domestic cricket tournaments, representing NCC with pride and contributing to the growth of cricket in the nation.</p>
+            </div>
+            <img src="{% static 'tournament/images/mission.jpg' %}" alt="Our Mission" class="team-image">
+        </div>
+    </section>
+
+    <section class="sponsors">
+        <h2 style="color: #000000;">Team Sponsors</h2>
+        <div class="sponsor-category">
+            <h3>Title Partner</h3>
+            <a href="https://www.facebook.com/profile.php?id=61553090427439" target="_blank">
+                <img src="{% static 'tournament/images/titlemcd.jpg' %}" alt="MCD Logo" class="sponsor-logo">
+            </a>
+        </div>
+        <div class="sponsor-category">
+            <h3>Principle Sponsors</h3>
+            <a href="https://www.ntc.net.np/" target="_blank">
+                <img src="{% static 'tournament/images/nt.jpg' %}" alt="NTC Logo" class="sponsor-logo">
+            </a>
+            <a href="https://www.adbl.gov.np/#!" target="_blank">
+                <img src="{% static 'tournament/images/krishi.jpg' %}" alt="Krishi Logo" class="sponsor-logo">
+            </a>
+            <a href="https://nepalbank.com.np/" target="_blank">
+                <img src="{% static 'tournament/images/NB.jpg' %}" alt="Nepal Bank Logo" class="sponsor-logo">
+            </a>
+        </div>
+        <div class="sponsor-category">
+            <h3>Associate Partners</h3>
+            <a href="https://www.artofliving.org/np-en" target="_blank">
+                <img src="{% static 'tournament/images/art.png' %}" alt="art of living Logo" class="sponsor-logo">
+            </a>
+            <a>
+                <img src="{% static 'tournament/images/ghca.jpg' %}" alt="ghca Logo" class="sponsor-logo">
+            </a>
+        </div>
+    </section>
+</main>
+{% endblock content %}

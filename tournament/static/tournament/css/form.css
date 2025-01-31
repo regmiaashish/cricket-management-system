@@ -2,6 +2,7 @@
 #signup{
   background-color: rgb(8, 122, 8);
 }
+
 /* Login and Register Container */
 .login-container, .register-container {
   background-color: white;
@@ -12,8 +13,8 @@
   flex-direction: column; /* Set the direction to column */
   justify-content: center; /* Center the items vertically within the container */
   align-items: center; /* Center the items horizontally within the container */
-  width: 90%; 
-  max-width: 420px; 
+  width: 28%; 
+  /* max-width: 420px;  */
   margin: 0 auto; /* Center horizontally on the page */
 }
 

@@ -7,15 +7,14 @@
   overflow-y: auto; /* Scrollable grid */
 }
 .player-box {
-  background:rgb(255, 255, 255);
+  /* background:rgb(255, 255, 255); */
   border: 3px solid #07650c;
   border-radius: 15px;
   text-align: center;
-  padding: 15px;
+  padding: 13px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
   color: black;
-  height: 20px;
 }
 
 .player-box:hover {
@@ -25,9 +24,9 @@
 }
 
 .player-box img {
-  max-width: 100%;
-  height: auto;
-  /* border-radius: 50%; */
+  max-width: 130px;
+  height: 200px;
+  border-radius: 15%;
 }
 
 .player-info {
@@ -49,10 +48,4 @@
 a {
   text-decoration: none;
   color: inherit;
-}
-.player-image{
-  width: 100px;  /* Set the width to 100px */
-height: 100px; /* Set the height to 100px */
-object-fit: cover; /* Ensures the image retains aspect ratio and fits within the box */
-border-radius: 20%; 
 }

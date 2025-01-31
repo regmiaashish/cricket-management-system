@@ -56,6 +56,10 @@ def logout_view(request):
 def newview(request):
     return render(request, "tournament/testview.html")
 
+@auth
+def aboutus(request):
+    return render(request, "tournament/about/about.html")
+
 
 # to list the players
 @auth
