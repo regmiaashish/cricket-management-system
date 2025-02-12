@@ -108,18 +108,18 @@ body {
 
 /* Authentication Navigation */  
 .navbar-nav {  
-    margin-right: var(--content-padding);  
+    margin-right: 10px;  
     display: flex;  
-    gap: 1rem;  
+    gap: 3rem;  
 }  
 
 .nav-item .nav-link {  
     border: 1px solid transparent;  
 }  
 
-.nav-item .nav-link:hover {  
-    border-color: var(--accent-color);  
-}  
+.sideicons li a{
+    text-decoration: none;
+}
 
 #team_logo{
     margin-bottom: -35px;
@@ -145,7 +145,7 @@ Content Styles with background image
     color: var(--text-dark);  
     text-align: center;
     flex: 1;
-    margin-top:100px;
+    margin-top:70px;
      margin-left:10px;  
     margin-right:10px;  
 }  
@@ -232,8 +232,8 @@ News Headlines
 .heading-slider .headline {  
     font-weight: normal;  
     font-size: 1.2rem;  
-    color: rgb(227, 234, 7);  
-    background-color: #0d14d7;
+    color: rgb(255, 255, 255);  
+    background-color: #096328;
 }  
 
 .typewrite {  
@@ -303,8 +303,9 @@ h1.animate {
     opacity: 0; /* Ensures the content starts hidden */
     animation-fill-mode: forwards; /* Keeps the animation state after it ends */
     font-family: Arial, sans-serif;
+    font-size:2.5em;;
     text-align: left;
-    margin-top: 20px;
+    margin-top: 20px;   
     margin-left: 20px;
 }
 
@@ -362,7 +363,7 @@ h1 span {
 
   .tagline {
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 1.5rem;
     color: #000000;
     font-weight:lighter;
     margin-top: 5px;

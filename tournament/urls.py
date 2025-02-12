@@ -1,6 +1,5 @@
 from django.urls import path
-# from django.contrib.auth import views as auth_views
-from tournament.views import register_view, logout_view, login_view, newview, playerlist, add_player, view_player, edit_player, manage_player,delete_player, coachview, coachlist, gallery1, gallery2, add_coach, edit_coach, delete_coach, view_coach, reachus, aboutus
+from tournament.views import register_view, logout_view, login_view, newview, playerlist, add_player, view_player, edit_player, manage_player,delete_player, coachview, coachlist, gallery1, gallery2, add_coach, edit_coach, delete_coach, view_coach, reachus, aboutus, match
 
 urlpatterns = [
     path('login/', login_view, name='login'),
@@ -34,4 +33,7 @@ urlpatterns = [
      path('coach/view/<id>', view_coach, name='view_coach'),#R
      path('coach/edit/<id>', edit_coach, name='edit_coach'),#U
      path('coach/delete/<id>', delete_coach, name='delete_coach'),#D
+     
+     ## for match
+     path('matches/', match, name='viewmatch')
 ]

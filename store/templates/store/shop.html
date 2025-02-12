@@ -1,0 +1,28 @@
+{% extends 'tournament/base.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'store/css/product.css' %}">
+<main class="content">
+    {% for data in  data %}
+    <div class="container">
+        <!-- Product Grid -->
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">
+                        <a href="#">                 
+                            {% if data.image %}
+                         <img src="{{ data.image.url }}" alt="Product Image">
+                           {% else %}
+                <img src="{% static 'tournament/images/logoncc.png'%}" alt="product" >
+                {% endif %}
+                    </a>
+                    </div>
+                <h3>{{data.name}}</h3>
+                <p class="price">NPR {{data.price}}</p>
+            </div>
+    </div>
+
+    {% endfor %}
+</main>
+{% endblock content %}

@@ -1,0 +1,10 @@
+{% extends 'tournament/base.html' %}
+{% block content %}
+
+<main class="content">
+  <p>Hii there, Here you will see the match history of of the Nepal Commerce Campus within 2 days</p>
+  {% for data in match %}
+  <td>{{data.ncc_score}}</td>
+  {% endfor %}
+</main>
+{% endblock content %}

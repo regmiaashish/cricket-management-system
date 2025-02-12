@@ -1,20 +1,4 @@
 from django.db import models
-
-class Team(models.Model):
-    name = models.CharField(max_length=100)
-    location = models.CharField(max_length=150, blank=True, null=True)  # Location of the opponent team
-    logo = models.ImageField(upload_to='team_logos/', blank=True, null=True)  # Optional logo for the opponent team
-    description = models.TextField(blank=True, null=True)  # Brief info about the opponent
-
-    # Stats against NCC
-    matches_against_ncc = models.IntegerField(default=0)
-    wins_against_ncc = models.IntegerField(default=0)
-    losses_against_ncc = models.IntegerField(default=0)
-
-    def __str__(self):
-        return self.name
-
-
 class Player(models.Model):
     # Basic details
     name = models.CharField(max_length=100)
@@ -68,25 +52,39 @@ class Player(models.Model):
     def __str__(self):
         return self.name
 
+
+class Team(models.Model):
+    name = models.CharField(max_length=50, null=True, blank=True)
+    address = models.CharField(max_length=255, blank=True, null=True) 
+
+    # Stats against NCC
+    matches_against_ncc = models.IntegerField(default=0)
+    wins_against_ncc = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.name 
       
 class Match(models.Model):
-    opponent_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='opponent_matches', default=1 )
     date = models.DateTimeField()
-    team_1_score = models.IntegerField(null=True, blank=True)
+    ncc_score = models.IntegerField(null=True, blank=True)
     team_2_score = models.IntegerField(null=True, blank=True)
-    result_choices = [
-        ('Team 1 Wins', 'team_1'),
-        ('Team 2 Wins', 'team_2'),
-        ('Draw', 'draw'),
-    ]
-    result = models.CharField(max_length=20, choices=result_choices, null=True, blank=True)
+    opponent_team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, blank=True) 
 
     @property
     def display_match(self):
-        return f'NCC vs {self.opponent_team}'
+        if self.opponent_team:
+            return f'NCC vs {self.opponent_team}'
+        return "Match Not Scheduled"
 
     def __str__(self):
         return self.display_match
+
+    result_choices = [
+        ('NCC Wins', 'ncc'),
+        ('Team 2 Wins', 'team_2'),
+        ('Draw', 'draw'),
+    ]
+    result = models.CharField(max_length=20, choices=result_choices, null=True, blank=True) 
 
 
 

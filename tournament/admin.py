@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Team, Player, Match, Coach
+from .models import  Player, Match, Coach, Team
 
 # admin.site.register(Tournament)
 admin.site.register(Team)

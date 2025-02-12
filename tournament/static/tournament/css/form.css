@@ -1,8 +1,4 @@
 
-#signup{
-  background-color: rgb(8, 122, 8);
-}
-
 /* Login and Register Container */
 .login-container, .register-container {
   background-color: white;
@@ -21,7 +17,7 @@
 /* Header */
 .login-container h2, .register-container h2 {
   text-align: center;
-  color: #4CAF50; /* Matching header color from main theme */
+  color: #0c3f0d; /* Matching header color from main theme */
   margin-bottom: 1.5rem;
   font-size: 2rem;
   font-weight: bold;

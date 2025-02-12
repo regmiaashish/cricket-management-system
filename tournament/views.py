@@ -3,7 +3,7 @@ from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from tournament.middlewares import auth, guest, staff
-from tournament.models import Player, Coach
+from tournament.models import Player, Coach, Match
 from tournament.forms import PlayerForm, CoachForm
 
 
@@ -237,3 +237,13 @@ def view_coach(request, id):
 @auth
 def reachus(request):
     return render(request, "tournament/contact.html")
+
+
+
+####################### For the match sections ########################
+
+
+def match(request):
+    matchdata = Match.objects.all()
+    context = {'data':matchdata}
+    return render(request, 'tournament/matches/match.html',context)

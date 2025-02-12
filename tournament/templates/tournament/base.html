@@ -53,7 +53,7 @@
                 {% endif %}
                 </div>
                 </li>
-                <li><a href="#">Schedule</a></li>
+                <li><a href="{% url 'viewmatch' %}">Matchbook</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
                 <div class="dropdown">
                     <li><a>Gallery</a></li>
@@ -65,13 +65,20 @@
                     </div>
                 </div>
                 <li><a href="{% url 'contact' %}">Reach Us</a></li>
+                {% if user.is_staff %}
+                <li><a href="#">StoreControl</a></li>
+                {% endif %}
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a href="#" class="nav-link"><img
-                            src="{% static 'tournament/images/shop.png'%}" height="28px" width="30px"></a></li>
-                            <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><img
-                                src="{% static 'tournament/images/logout1.png'%}" height="28px" width="30px"></a></li>
-            </ul>
+                {% if user.is_staff == False %}
+                <li class="nav-item"><a href="{% url 'shopview' %}" class="nav-link"><img
+                    src="{% static 'tournament/images/shop2.png'%}" height="35px" width="40px"></a>
+                </li> 
+                {% endif %}
+                <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">
+                    <img src="{% static 'tournament/images/logout1.png'%}" height="28px" width="30px"></a>
+                    <li>
+                    </ul>
         </nav>
     </header>
 
@@ -114,7 +121,7 @@
 
     <!-- Footer Section -->
     <footer class="footer">
-        <p>&copy; 2025 Cricket Tournament. All rights reserved.</p>
+        <p>© 2025 Cricket Tournament. All rights reserved.</p>
         <div class="social-icons">
             <a href="https://www.instagram.com/regs.exe" class="icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             <a href="https://www.linkedin.com/in/aashish-regmi-228868309/" class="icon linkedin" aria-label="Linkedin"><i class="fab fa-linkedin"></i></a>
