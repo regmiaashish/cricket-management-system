@@ -40,7 +40,7 @@
                     </div>
                     <div class="dropdown">
                         <a>Coach</a>
-                        <div class="dropdown-content">  
+                        <div class="dropdown-content">
                             <ol class="custom-list">
                                 <li><a href="{% url 'coach' %}">Coach</a></li><br>
                                 <li><a href="{% url 'coachlist' %}">Manage</a></li><br>
@@ -72,13 +72,23 @@
             <ul class="navbar-nav ml-auto">
                 {% if user.is_staff == False %}
                 <li class="nav-item"><a href="{% url 'shopview' %}" class="nav-link"><img
-                    src="{% static 'tournament/images/shop2.png'%}" height="35px" width="40px"></a>
-                </li> 
+                            src="{% static 'tournament/images/shop2.png'%}" height="35px" width="40px"></a>
+                </li>
                 {% endif %}
-                <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">
-                    <img src="{% static 'tournament/images/logout1.png'%}" height="28px" width="30px"></a>
-                    <li>
-                    </ul>
+                <li class="nav-item"><!-- From Uiverse.io by Lealdos -->
+                    <!-- From Uiverse.io by vinodjangid07 -->
+                    <a  class="Btn" href="{% url 'logout' %}" >
+
+                        <div class="sign"><svg viewBox="0 0 512 512">
+                                <path
+                                    d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z">
+                                </path>
+                            </svg></div>
+                            <div class="text">Logout</div>
+                    </a>
+
+                <li>
+            </ul>
         </nav>
     </header>
 
@@ -91,20 +101,22 @@
 
     <!-- Main Content Section -->
     {% block content %}
-    <main class="content">  
-     <div class="backimage"><br>
-        <i class="tagline"> <span>Bound by Cricket, Fueled by Glory!</span><br>~ CricNCC</i>
+    <main class="content">
+        <div class="backimage"><br>
+            <i class="tagline"> <span>Bound by Cricket, Fueled by Glory!</span><br>~ CricNCC</i>
 
             <h1 class="animate">If you <span style="color:rgb(195, 8, 8)"> Don't</span> <br>
                 <p> <span style="color: rgb(12, 121, 32);">Practice</span> ,</p>
-                You <span style="color: rgb(195, 8, 8);">Don't</span><br> Deserve to <span style="color: rgb(38, 35, 176);">Win</span> .</h1>
-                <div class="news">
-                    <div class="heading-slider">
-                        <p class="headline"> ⭐Top News<i class="wrap"></i>
-                        </p>
-                        
-                        <p>
-                            <a href="#" class="typewrite" data-period="200" data-type='[
+                You <span style="color: rgb(195, 8, 8);">Don't</span><br> Deserve to <span
+                    style="color: rgb(38, 35, 176);">Win</span> .
+            </h1>
+            <div class="news">
+                <div class="heading-slider">
+                    <p class="headline"> ⭐Top News<i class="wrap"></i>
+                    </p>
+
+                    <p>
+                        <a href="#" class="typewrite" data-period="200" data-type='[
                             "2021🏆,2023🏆 and 2024🏆",
                             "🥎 Nishan Bharti became the best bowler of BIM CUP 2024.",
                             "🏏Aashish Regmi become the excellent debudant."   
@@ -123,8 +135,10 @@
     <footer class="footer">
         <p>© 2025 Cricket Tournament. All rights reserved.</p>
         <div class="social-icons">
-            <a href="https://www.instagram.com/regs.exe" class="icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/aashish-regmi-228868309/" class="icon linkedin" aria-label="Linkedin"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/regs.exe" class="icon instagram" aria-label="Instagram"><i
+                    class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/aashish-regmi-228868309/" class="icon linkedin"
+                aria-label="Linkedin"><i class="fab fa-linkedin"></i></a>
             <a href="#" class="icon youtube" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
             <a href="#" class="icon pinterest" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
         </div>
@@ -136,4 +150,5 @@
     <script src="{% static 'tournament/js/stats.js' %}"></script>
     <script src="{% static 'tournament/js/galleryslider.js' %}"></script>
 </body>
+
 </html>
