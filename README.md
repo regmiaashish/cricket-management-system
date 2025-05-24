@@ -1,6 +1,6 @@
 # 🏏 Cricket Management System
 
-A Django-based web application designed to manage and streamline cricket-related activities such as player registration, match scheduling, team management, and more.
+A Django-based web application designed to manage and streamline cricket-related activities such as player registration, match scheduling, team management, and e-commerce section where user can purchase team based jerseys, kit, bats etc.
 
 ## 📌 Project Overview
 
