@@ -10,7 +10,7 @@
         <div class="product-grid">
             <div class="product-card">
                 <div class="product-image">
-                        <a href="product_detail.html">                 
+                        <a href="{% url 'eachproduct' data.id %}">
                             {% if data.image %}
                          <img src="{{ data.image.url }}" alt="Product Image">
                            {% else %}

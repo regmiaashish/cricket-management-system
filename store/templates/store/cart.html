@@ -1,0 +1,124 @@
+{% extends 'tournament/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .cart-container {
+        padding: 40px 0;
+        background-color: #f7f7f7;
+    }
+
+    .cart-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+
+    .cart-table th,
+    .cart-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+
+    .cart-table th {
+        background-color: #006400;
+        color: white;
+    }
+
+    .cart-total {
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    .checkout-btn{
+        background-color: #006400;
+        color: white;
+        border: none;
+        padding: 10px 16px; 
+        font-weight: bold;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+    }
+
+    .checkout-btn:hover{
+        background-color: #004d00;
+    }
+
+    .remove-btn {
+        background-color: #ff0000; /* Red color */
+        padding: 10px 16px;
+    }
+
+    .remove-btn:hover {
+        background-color: #cc0000; /* Darker red on hover */
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const removeButtons = document.querySelectorAll('.cart-container .remove-btn');
+
+    removeButtons.forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            const confirmed = confirm('Are you sure you want to remove this item from your cart?');
+            if (confirmed) {
+                this.closest('form').submit();
+            }
+        });
+    });
+});
+</script>
+<main class="content">
+    <div class="container cart-container">
+        <h2 class="text-center mb-4">Hii {{ request.user }}!! Your Shopping Cart</h2>
+
+        {% if cart_items %}
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Size</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.size }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>Rs. {{ item.product.price }}</td>
+                    <td>Rs. {{ item.subtotal }}</td>
+                    <td>
+                        <form method="POST" action="{% url 'remove_from_cart' item.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="remove-btn">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="5" class="text-end cart-total">Total:</td>
+                    <td class="cart-total">Rs. {{ total }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="text-end">
+            <a href="{% url 'shopview' %}" class="checkout-btn">Go to Shop</a>
+            <a href="{% url 'checkout' %}" class="checkout-btn">Proceed to Checkout</a>
+        </div>
+
+        {% else %}
+        <p class="text-center">Your cart is empty.</p>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}

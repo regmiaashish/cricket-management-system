@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+from decouple import config
 from pathlib import Path
 from dotenv import load_dotenv  # type: ignore
 
@@ -97,6 +97,7 @@ DATABASES = {
     }
 }
 
+KHALTI_SECRET_KEY = config('KHALTI_SECRET_KEY')
 
 
 # Password validation

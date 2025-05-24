@@ -1,0 +1,37 @@
+{% extends 'tournament/base.html' %}
+{% block content %}
+
+<main class="content">
+  <h1>Product Details:</h1>
+  <button type="button"><a href="{% url 'add_product' %}">Add New</a></button>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>SN</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in data %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.stock }}</td>
+          <td>
+            <a href="{% url 'edit_product' product.id %}">Edit</a>|
+            <a href="{% url 'delete_product' product.id %}">Delete</a>
+
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      </tbody>
+    </table>
+  </div>
+</main>
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends 'tournament/base.html' %}
+{% block content %}
+<main class="content">
+  <a href="{% url 'download_receipt' order.id %}" class="btn btn-primary">
+    Download Receipt (PDF)
+</a>
+  <div class="login-container">
+    <h2>Payment Successful!</h2>
+    <p>Order ID: {{ order.id }}</p>
+    <p>Transaction ID: {{ order.khalti_transaction_id }}</p>
+    <p>Total Paid: {{ order.total_amount }}</p>
+  </div>
+
+</main>
+{% endblock content %}

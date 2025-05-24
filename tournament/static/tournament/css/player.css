@@ -3,7 +3,6 @@
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Dynamically adjust columns */
   gap: 20px;
   padding: 20px;
-  max-height: calc(100vh - 80px); /* Leave space for the title */
   overflow-y: auto; /* Scrollable grid */
 }
 .player-box {
