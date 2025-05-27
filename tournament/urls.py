@@ -1,5 +1,5 @@
 from django.urls import path
-from tournament.views import register_view, logout_view, login_view, newview, playerlist, add_player, view_player, edit_player, manage_player,delete_player, coachview, coachlist, gallery1, gallery2, add_coach, edit_coach, delete_coach, view_coach, reachus, aboutus, match
+from tournament.views import register_view, logout_view, login_view, newview, playerlist, add_player, view_player, edit_player, manage_player,delete_player, coachview, coachlist, gallery1, gallery2, add_coach, edit_coach, delete_coach, view_coach, reachus, aboutus, upcoming_matches_view, match_centre, add_match, vote_ajax
 
 urlpatterns = [
     path('login/', login_view, name='login'),
@@ -35,5 +35,10 @@ urlpatterns = [
      path('coach/delete/<id>', delete_coach, name='delete_coach'),#D
      
      ## for match
-     path('matches/', match, name='viewmatch')
+     path('upcoming/', upcoming_matches_view, name='upcoming_matches'),
+     path('match-centre/<int:match_id>/', match_centre, name='match_centre'),
+     path('match-centre/<int:match_id>/vote/', vote_ajax, name='vote_ajax'),
+
+     path('match/add', add_match, name='add_match')
+
 ]

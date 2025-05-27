@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
 class Player(models.Model):
     # Basic details
     name = models.CharField(max_length=100)
@@ -54,38 +56,23 @@ class Player(models.Model):
 
 
 class Team(models.Model):
-    name = models.CharField(max_length=50, null=True, blank=True)
-    address = models.CharField(max_length=255, blank=True, null=True) 
-
-    # Stats against NCC
-    matches_against_ncc = models.IntegerField(default=0)
-    wins_against_ncc = models.IntegerField(default=0)
+    name = models.CharField(max_length=100)
+    logo = models.ImageField(upload_to='logos/', blank=True, null=True)  # Or use static if you're not uploading dynamically
 
     def __str__(self):
-        return self.name 
+        return self.name
       
 class Match(models.Model):
+    team1 = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team1_matches', null=True)
+    team2 = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team2_matches', null=True)
     date = models.DateTimeField()
-    ncc_score = models.IntegerField(null=True, blank=True)
-    team_2_score = models.IntegerField(null=True, blank=True)
-    opponent_team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, blank=True) 
+    venue = models.CharField(max_length=200, default='Mulpani Cricket Ground') 
 
-    @property
-    def display_match(self):
-        if self.opponent_team:
-            return f'NCC vs {self.opponent_team}'
-        return "Match Not Scheduled"
+    def is_upcoming(self):
+        return self.date > timezone.now()
 
     def __str__(self):
-        return self.display_match
-
-    result_choices = [
-        ('NCC Wins', 'ncc'),
-        ('Team 2 Wins', 'team_2'),
-        ('Draw', 'draw'),
-    ]
-    result = models.CharField(max_length=20, choices=result_choices, null=True, blank=True) 
-
+        return f"{self.team1} vs {self.team2} on {self.date.date()}"
 
 
 class Coach(models.Model):
@@ -111,3 +98,30 @@ class Coach(models.Model):
     is_available = models.BooleanField(default=False)    
     def __str__(self):
         return f"{self.name} - {self.role}"
+
+
+
+class MatchVote(models.Model):
+    match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    voted_team = models.ForeignKey(Team, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('match', 'user')  # Ensures one vote per user per match
+
+    def __str__(self):
+        return f"{self.user.username} voted for {self.voted_team.name} in match {self.match.id}"
+    
+    
+    
+class HeadToHeadRecord(models.Model):
+    team1 = models.ForeignKey(Team, related_name='team1_h2h', on_delete=models.CASCADE)
+    team2 = models.ForeignKey(Team, related_name='team2_h2h', on_delete=models.CASCADE)
+    total_matches = models.PositiveIntegerField(default=0)
+    team1_wins = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        unique_together = ('team1', 'team2')
+
+    def __str__(self):
+        return f"{self.team1.name} vs {self.team2.name} Record"

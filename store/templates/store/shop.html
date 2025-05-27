@@ -3,26 +3,28 @@
 
 {% load static %}
 <link rel="stylesheet" href="{% static 'store/css/product.css' %}">
-<main class="content">
-    {% for data in  data %}
+
+<main class="content" id="custom-grid">
     <div class="container">
         <!-- Product Grid -->
         <div class="product-grid">
-            <div class="product-card">
-                <div class="product-image">
+            {% for data in data %}
+                <div class="product-card">
+                    <div class="product-image">
                         <a href="{% url 'eachproduct' data.id %}">
                             {% if data.image %}
-                         <img src="{{ data.image.url }}" alt="Product Image">
-                           {% else %}
-                <img src="{% static 'tournament/images/logoncc.png'%}" alt="product" >
-                {% endif %}
-                    </a>
+                                <img src="{{ data.image.url }}" alt="Product Image">
+                            {% else %}
+                                <img src="{% static 'tournament/images/logoncc.png' %}" alt="product">
+                            {% endif %}
+                        </a>
                     </div>
-                <h3>{{data.name}}</h3>
-                <p class="price">NPR {{data.price}}</p>
-            </div>
+                    <h3>{{ data.name }}</h3>
+                    <p class="price">NPR {{ data.price }}</p>
+                </div>
+            {% endfor %}
+        </div>
     </div>
-
-    {% endfor %}
 </main>
+
 {% endblock content %}

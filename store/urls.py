@@ -23,5 +23,4 @@ urlpatterns = [
     # urls.py
     path('orders/<int:order_id>/receipt/', download_receipt, name='download_receipt'),
     path('complete-order/', complete_order, name='complete_order'),
-    
 ]

@@ -1,0 +1,127 @@
+{% extends 'tournament/base.html' %}
+{% load static %}
+{% block content %}
+<main class="content">
+
+    <title>Match Centre</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        h3 {
+            margin-top: 40px;
+            font-size: 22px;
+        }
+        .vote-btn {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            margin: 10px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .vote-btn:hover {
+            background-color: #0056b3;
+        }
+        .results {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        #h2hChart {
+            max-width: 300px;
+            margin: 30px auto;
+        }
+        .team-logos {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .team-logos img {
+            height: 60px;
+            margin: 0 10px;
+        }
+    </style>
+
+    <!-- Team Names & Logos -->
+    <div class="team-logos">
+        <img src="{{ match.team1.logo.url }}" alt="{{ team1.name }} Logo">
+         vs 
+        <img src="{{ match.team2.logo.url }}" alt="{{ team2.name }} Logo">
+    </div>
+
+    <!-- Voting Section -->
+    <h3>Predict Your Winner</h3>
+    <button class="vote-btn" data-team="{{ team1.id }}">{{ team1.name }}</button>
+    <button class="vote-btn" data-team="{{ team2.id }}">{{ team2.name }}</button>
+
+    <!-- Vote Result -->
+    <div class="results">
+        <p>{{ team1.name }}: <span id="team1_percent">{{ team1_percent }}%</span></p>
+        <p>{{ team2.name }}: <span id="team2_percent">{{ team2_percent }}%</span></p>
+    </div>
+
+    <!-- Head-to-Head Pie Chart -->
+    <h3>Head-to-Head Record</h3>
+    <canvas id="h2hChart"></canvas>
+
+    <!-- JSON for Chart -->
+    {{ h2h_labels|json_script:"h2hLabels" }}
+    {{ h2h_data|json_script:"h2hData" }}
+
+    <script>
+        const ctx = document.getElementById('h2hChart').getContext('2d');
+        const labels = JSON.parse(document.getElementById('h2hLabels').textContent);
+        const data = JSON.parse(document.getElementById('h2hData').textContent);
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    backgroundColor: ['#36A2EB', '#FF6384'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 20,
+                            padding: 20
+                        }
+                    }
+                }
+            }
+        });
+
+        // AJAX Vote Handler
+        $(document).ready(function(){
+            $('.vote-btn').click(function(){
+                let teamId = $(this).data('team');
+                $.ajax({
+                    url: "{% url 'vote_ajax' match.id %}",
+                    method: "POST",
+                    data: {
+                        'team_id': teamId,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function(response){
+                        $('#team1_percent').text(response.team1_percent + "%");
+                        $('#team2_percent').text(response.team2_percent + "%");
+                        alert("Thanks for voting!");
+                    },
+                    error: function(xhr){
+                        alert(xhr.responseJSON.error || "Voting failed.");
+                    }
+                });
+            });
+        });
+    </script>
+</main>
+{% endblock content %}

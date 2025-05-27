@@ -251,7 +251,6 @@ def download_receipt(request, order_id):
         return HttpResponse("PDF generation failed", status=500)
     return response
 
-
 @auth
 def complete_order(request):
     # Get all cart items for this user

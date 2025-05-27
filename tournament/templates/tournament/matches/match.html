@@ -1,10 +1,109 @@
 {% extends 'tournament/base.html' %}
+{% load static %}
 {% block content %}
 
 <main class="content">
-  <p>Hii there, Here you will see the match history of of the Nepal Commerce Campus within 2 days</p>
-  {% for data in match %}
-  <td>{{data.ncc_score}}</td>
+  {% for match in matches %}
+  <div class="match-card">
+    <div class="match-date">
+      {{ match.date|date:"j F, Y" }} | {{ match.date|date:"l" }}
+    </div>
+    <div class="match-content">
+      <div class="team">
+        <img src="{{ match.team1.logo.url }}" alt="{{ match.team1.name }}">
+
+        <div>{{ match.team1.name|upper }}</div>
+      </div>
+
+      <div class="vs">VS</div>
+
+      <div class="team">
+        <img src="{{ match.team2.logo.url }}" alt="{{ match.team2.name }}">
+
+        <div>{{ match.team2.name|upper }}</div>
+      </div>
+
+      <div class="match-details">
+        <div><strong>{{ match.date|time:"H:i" }} (NPT)</strong></div>
+        <div>{{ match.venue }}</div>
+        <a href="{% url 'match_centre' match.id %}" class="match-button">Matchcentre</a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <div style="text-align:center; padding:50px;">No upcoming matches found.</div>
   {% endfor %}
+
+  <style>
+    .match-card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      margin: 20px auto;
+      max-width: 900px;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .match-date {
+      background-color: #065f1b;
+      color: #fff;
+      padding: 10px 20px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .match-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 20px 0;
+    }
+
+    .team {
+      text-align: center;
+      flex: 1;
+    }
+
+    .team img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 5px;
+    }
+
+    .vs {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .match-details {
+      text-align: right;
+      flex: 1;
+    }
+
+    .match-button {
+      background-color: #cfa72a;
+      color: black;
+      font-weight: bold;
+      padding: 8px 16px;
+      border-radius: 5px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .match-content {
+        flex-direction: column;
+      }
+
+      .match-details {
+        text-align: center;
+        margin-top: 10px;
+      }
+    }
+  </style>
 </main>
 {% endblock content %}

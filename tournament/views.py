@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import timezone
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from tournament.middlewares import auth, guest, staff
-from tournament.models import Player, Coach, Match
-from tournament.forms import PlayerForm, CoachForm
+from tournament.models import Player, Coach, Match, MatchVote, Team, HeadToHeadRecord
+from tournament.forms import PlayerForm, CoachForm, MatchForm
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -243,7 +245,88 @@ def reachus(request):
 ####################### For the match sections ########################
 
 
-def match(request):
-    matchdata = Match.objects.all()
-    context = {'data':matchdata}
-    return render(request, 'tournament/matches/match.html',context)
+def upcoming_matches_view(request):
+    upcoming_matches = Match.objects.filter(date__gt=timezone.now()).order_by('date')
+    return render(request, 'tournament/matches/match.html', {'matches': upcoming_matches})
+
+def add_match(request):
+    form = MatchForm()
+    if request.method == "POST":
+        form = MatchForm(request.POST, request.FILES or None)
+        if form.is_valid():
+            form.save()
+            return redirect("match_centre")
+        else:
+            return form.errors
+
+    info = {"data": "Form FillUp", "form": form}
+    return render(request, "tournament/matches/addmatch.html", info)
+
+
+
+
+
+def match_centre(request, match_id):
+    match = get_object_or_404(Match, id=match_id)
+    team1 = match.team1
+    team2 = match.team2
+
+    # Vote statistics
+    votes = MatchVote.objects.filter(match=match)
+    team1_votes = votes.filter(voted_team=team1).count()
+    team2_votes = votes.filter(voted_team=team2).count()
+    total_votes = team1_votes + team2_votes or 1  # Avoid division by zero
+
+    # Head-to-head record
+    h2h, _ = HeadToHeadRecord.objects.get_or_create(team1=team1, team2=team2)
+    team1_wins = h2h.team1_wins
+    team2_wins = h2h.total_matches - team1_wins
+    
+    
+
+
+    context = {
+        'match': match,
+        'team1': team1,
+        'team2': team2,
+        'team1_votes': team1_votes,
+        'team2_votes': team2_votes,
+        'team1_percent': round((team1_votes / total_votes) * 100, 2),
+        'team2_percent': round((team2_votes / total_votes) * 100, 2),
+        'h2h_labels': [team1.name, team2.name],
+        'h2h_data': [team1_wins, team2_wins],
+        
+    }
+    import json
+
+
+    return render(request, 'tournament/matches/match_centre.html', context)
+
+@auth
+def vote_ajax(request, match_id):
+    if request.method == "POST":
+        team_id = request.POST.get("team_id")
+        match = get_object_or_404(Match, id=match_id)
+
+        # Prevent multiple votes
+        if MatchVote.objects.filter(match=match, user=request.user).exists():
+            return JsonResponse({'error': 'Already voted'}, status=400)
+
+        try:
+            team = Team.objects.get(id=team_id)
+            MatchVote.objects.create(match=match, user=request.user, voted_team=team)
+        except Team.DoesNotExist:
+            return JsonResponse({'error': 'Invalid team'}, status=400)
+
+        # Updated vote stats
+        votes = MatchVote.objects.filter(match=match)
+        team1_votes = votes.filter(voted_team=match.team1).count()
+        team2_votes = votes.filter(voted_team=match.team2).count()
+        total = team1_votes + team2_votes or 1
+
+        return JsonResponse({
+            'team1_percent': round((team1_votes / total) * 100, 2),
+            'team2_percent': round((team2_votes / total) * 100, 2),
+        })
+
+    return JsonResponse({'error': 'Invalid request'}, status=400)
