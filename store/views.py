@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse, HttpResponse
 from django.contrib import messages
@@ -7,7 +8,6 @@ from store.models import Product, CartItem, Order, OrderItem
 from django.contrib.auth.decorators import login_required
 from store.forms import ProductForm
 from decimal import Decimal
-from django.conf import settings
 import requests
 from xhtml2pdf import pisa
 from django.template.loader import get_template
@@ -137,7 +137,7 @@ def delete_product(request, id):
 
 ##Checkout
 
-
+@auth
 def checkout_view(request):
     cart_items = CartItem.objects.filter(user=request.user)
 
@@ -227,7 +227,6 @@ def verify_payment(request):
     return render(request, "store/payment_failed.html", {
         "error": data.get("message", "Payment Failed."),
     })
-    
     
     
     

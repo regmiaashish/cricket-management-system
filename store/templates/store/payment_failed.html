@@ -1,3 +1,9 @@
+{% extends 'tournament/base.html' %}
+{% block content %}
+<main class="content">
 <h2>Payment Failed!</h2>
 <p>{{ error }}</p>
 <a href="{% url 'checkout' %}">Try Again</a>
+
+</main>
+{% endblock %}

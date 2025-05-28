@@ -44,7 +44,7 @@ def login_view(request):
     return render(request, "tournament/login.html", {"form": form})
 
 
-@auth
+
 def homepage(request):
     return render(request, "tournament/base.html")
 
@@ -55,16 +55,15 @@ def logout_view(request):
 
 
 # To test the extends for the base.html
-def newview(request):
-    return render(request, "tournament/testview.html")
 
-@auth
+
+
 def aboutus(request):
     return render(request, "tournament/about/about.html")
 
 
 # to list the players
-@auth
+
 def playerlist(request):
     content = {"data": Player.objects.all}
     return render(request, "tournament/playerlist.html", content)
@@ -77,7 +76,7 @@ def manage_player(request):
 
 
 # View  individual player in  details
-@auth
+
 def view_player(request, id):
     reader = Player.objects.get(id=id)
     if reader.balls_faced > 0:
@@ -164,25 +163,26 @@ def delete_player(request, id):
 
 
 # For the gallery
-@auth
+
 def gallery1(request):
     return render(request, "tournament/gallery/gallery.html")
 
 
-@auth
+
 def gallery2(request):
     return render(request, "tournament/gallery/gallery1.html")
 
 
 # For the Coach
 @auth
+@staff
 def coachview(request):
     data = Coach.objects.all()
     content = {"data": data}
     return render(request, "tournament/coach/managecoach.html", content)
 
 
-@auth
+
 def coachlist(request):
     content = {"data": Coach.objects.all}
     return render(request, "tournament/coach/coachlist.html", content)
@@ -226,7 +226,7 @@ def delete_coach(request, id):
     return redirect("coachlist")
 
 
-@auth
+
 def view_coach(request, id):
     reader = Coach.objects.get(id=id)
     context = {
@@ -236,7 +236,6 @@ def view_coach(request, id):
 
 
 # for contact US
-@auth
 def reachus(request):
     return render(request, "tournament/contact.html")
 
@@ -249,23 +248,12 @@ def upcoming_matches_view(request):
     upcoming_matches = Match.objects.filter(date__gt=timezone.now()).order_by('date')
     return render(request, 'tournament/matches/match.html', {'matches': upcoming_matches})
 
-def add_match(request):
-    form = MatchForm()
-    if request.method == "POST":
-        form = MatchForm(request.POST, request.FILES or None)
-        if form.is_valid():
-            form.save()
-            return redirect("match_centre")
-        else:
-            return form.errors
-
-    info = {"data": "Form FillUp", "form": form}
-    return render(request, "tournament/matches/addmatch.html", info)
 
 
 
 
 
+@auth
 def match_centre(request, match_id):
     match = get_object_or_404(Match, id=match_id)
     team1 = match.team1
@@ -297,7 +285,7 @@ def match_centre(request, match_id):
         'h2h_data': [team1_wins, team2_wins],
         
     }
-    import json
+
 
 
     return render(request, 'tournament/matches/match_centre.html', context)

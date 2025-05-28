@@ -1,11 +1,10 @@
 from django.urls import path
-from tournament.views import register_view, logout_view, login_view, newview, playerlist, add_player, view_player, edit_player, manage_player,delete_player, coachview, coachlist, gallery1, gallery2, add_coach, edit_coach, delete_coach, view_coach, reachus, aboutus, upcoming_matches_view, match_centre, add_match, vote_ajax
+from tournament.views import register_view, logout_view, login_view, playerlist, add_player, view_player, edit_player, manage_player,delete_player, coachview, coachlist, gallery1, gallery2, add_coach, edit_coach, delete_coach, view_coach, reachus, aboutus, upcoming_matches_view, match_centre, vote_ajax
 
 urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
-    path('test/', newview, name='testview'),
     #For Gallery
     path('gallery/', gallery1, name='gallery'),
     path('gallery2/', gallery2, name='gallery1'),
@@ -39,6 +38,6 @@ urlpatterns = [
      path('match-centre/<int:match_id>/', match_centre, name='match_centre'),
      path('match-centre/<int:match_id>/vote/', vote_ajax, name='vote_ajax'),
 
-     path('match/add', add_match, name='add_match')
+ 
 
 ]
