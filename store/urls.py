@@ -1,5 +1,5 @@
 from django.urls import path
-from store.views import shop, eachproduct, add_to_cart, view_cart, remove_from_cart, product_list, add_product, edit_product, delete_product, checkout_view ,initiate_payment, verify_payment, download_receipt, complete_order
+from store.views import shop, eachproduct, add_to_cart, view_cart, remove_from_cart, product_list, add_product, edit_product, delete_product, checkout_view ,initiate_payment, verify_payment, download_receipt
 
 urlpatterns = [
     path('',shop, name='shopview'),
@@ -22,5 +22,5 @@ urlpatterns = [
 
     # urls.py
     path('orders/<int:order_id>/receipt/', download_receipt, name='download_receipt'),
-    path('complete-order/', complete_order, name='complete_order'),
+    # path('complete-order/', complete_order, name='complete_order'),
 ]

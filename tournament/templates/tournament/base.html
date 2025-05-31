@@ -24,6 +24,8 @@
     <nav class="main-nav">
         <a href="{% url 'homepage' %}" style="text-decoration: none;" class="logoncc">
             <img src="{% static 'tournament/images/newlogo.png' %} " id="team_logo"></a>
+   <p style="font-size:11px;">{{ request.user }}</p>
+
         <ul>
             <li><a href="{% url 'homepage' %}">Home</a></li>
             <li>
@@ -130,7 +132,7 @@
                     <a href="#" class="typewrite" data-period="200" data-type='[
                             "2021🏆,2023🏆 and 2024🏆",
                             "🥎 Nishan Bharti became the best bowler of BIM CUP 2024.",
-                            "🏏Aashish Regmi become the excellent debudant."   
+                            "🏏Aashish Regmi became the excellent debudant."
                             ]'>
                     </a>
                 </p>

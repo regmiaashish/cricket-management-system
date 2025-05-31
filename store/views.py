@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, Http404
 from django.contrib import messages
 from django.db import transaction
 from tournament.middlewares import auth, guest, staff
@@ -60,9 +60,7 @@ def add_to_cart(request, product_id):
         quantity = int(request.POST.get("quantity", 1))
 
         if quantity > product.stock:
-            messages.error(
-                request, "The selected quantity exceeds the available stock."
-            )
+            
             return redirect("view_cart")
 
         with transaction.atomic():
@@ -149,10 +147,20 @@ def checkout_view(request):
     order = Order.objects.create(
         user=request.user, total_amount=Decimal(total), is_paid=False
     )
+    
+        # ✅ Save OrderItems before redirecting to Khalti
+    for item in cart_items:
+        OrderItem.objects.create(
+            order=order,
+            product=item.product,
+            size=item.size,
+            quantity=item.quantity,
+            price=item.product.price,
+        )
 
     return redirect("initiate_payment", order_id=order.id)
 
-
+@transaction.atomic()
 def initiate_payment(request, order_id):
     order = get_object_or_404(Order, id=order_id, user=request.user)
 
@@ -189,7 +197,7 @@ def initiate_payment(request, order_id):
         )
 
 
-
+@transaction.atomic()
 def verify_payment(request):
     pidx = request.GET.get("pidx")
     order_id = request.GET.get("purchase_order_id")
@@ -219,8 +227,9 @@ def verify_payment(request):
         order.save()
 
         # ✅ Clear cart only if user is logged in
-        if request.user.is_authenticated:
-            CartItem.objects.filter(user=request.user).delete()
+        if order.user:
+            CartItem.objects.filter(user=order.user).delete()
+
 
         return render(request, "store/payment_success.html", {"order": order})
 
@@ -231,10 +240,9 @@ def verify_payment(request):
     
     
 
-
-@auth
 def download_receipt(request, order_id):
-    order = get_object_or_404(Order, id=order_id, user=request.user)
+
+    order = Order.objects.get(id=order_id)
 
     template_path = 'store/order_receipt.html'
     context = {'order': order}
@@ -248,44 +256,6 @@ def download_receipt(request, order_id):
     pisa_status = pisa.CreatePDF(html, dest=response)
     if pisa_status.err:
         return HttpResponse("PDF generation failed", status=500)
+
     return response
 
-@auth
-def complete_order(request):
-    # Get all cart items for this user
-    cart_items = CartItem.objects.filter(user=request.user)
-    if not cart_items.exists():
-        # If cart is empty, send back to cart page
-        return redirect('view_cart')
-
-    # Calculate total price for the order
-    total_price = sum(item.product.price * item.quantity for item in cart_items)
-
-    # Simulate Khalti transaction ID here; replace this with your real payment info
-    khalti_txn_id = 'dummy_khalti_txn_id'
-
-    # Use transaction to save order and order items atomically
-    with transaction.atomic():
-        # Create the Order
-        order = Order.objects.create(
-            user=request.user,
-            total_amount=total_price,
-            is_paid=True,
-            khalti_transaction_id=khalti_txn_id,
-        )
-
-        # For each cart item, create a matching OrderItem
-        for item in cart_items:
-            OrderItem.objects.create(
-                order=order,
-                product=item.product,
-                size=item.size,
-                quantity=item.quantity,
-                price=item.product.price,
-            )
-
-        # Clear the cart after order is saved
-        cart_items.delete()
-
-    # Redirect user to download the receipt PDF
-    return redirect('download_receipt', order_id=order.id)
