@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from decouple import config
 from pathlib import Path
 from dotenv import load_dotenv  # type: ignore
+import dj_database_url
 
 import os
 
@@ -19,6 +20,7 @@ load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -103,6 +105,14 @@ DATABASES = {
         'PORT': '5432',  # Default PostgreSQL port
     }
 }
+
+# This will override the database settings if a DATABASE_URL exists (on Render)
+DATABASE_URL = os.environ.get('DATABASE_URL')
+if DATABASE_URL:
+    DATABASES['default'] = dj_database_url.config(
+        default=DATABASE_URL,
+        conn_max_age=600
+    )
 
 KHALTI_SECRET_KEY = config('KHALTI_SECRET_KEY')
 
