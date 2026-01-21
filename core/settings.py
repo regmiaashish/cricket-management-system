@@ -30,10 +30,16 @@ SECRET_KEY = 'django-insecure-8p38**twrux+1fyays=drk*tv(e_d$eg*(ii_75ely^$90t(wj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS = [RENDER_EXTERNAL_HOSTNAME]
+else:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
-# Application definition
+
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
