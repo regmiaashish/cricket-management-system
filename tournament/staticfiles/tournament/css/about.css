@@ -1,0 +1,132 @@
+/* Navbar Styles */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* About Sections */
+.about-us, .mission {
+    padding: 30px 20px;
+}
+
+.about-us h1, .about-us h2,
+.mission h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: rgb(3, 76, 3);
+}
+
+#content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.about-text {
+    flex: 1;
+    min-width: 280px;
+    max-width: 50%;
+    font-size: 1.1rem;
+    text-align: justify;
+    line-height: 1.8;
+}
+
+.team-image {
+    flex: 1;
+    max-width: 50%;
+    min-width: 250px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Mission Section Specific */
+.mission .about-text {
+    font-size: 1.1rem;
+}
+
+.mission .team-image {
+    border-radius: 10px;
+}
+
+/* Sponsors Section */
+.sponsors {
+    margin-top: 40px;
+    font-size: 1rem;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+}
+
+.sponsor-category {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.sponsor-category h3 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    padding: 10px 0;
+    background-color: rgb(2, 53, 2);
+    color: white;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.sponsor-logo {
+    width: 170px;
+    height: 130px;
+    object-fit: cover;
+    display: inline-block;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sponsor-logo:hover {
+    transform: scale(1.05);
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Social Media Links */
+.social-media {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+.social-media a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-text, .team-image {
+        max-width: 100%;
+    }
+
+    .sponsor-logo {
+        width: 130px;
+        height: auto;
+    }
+}

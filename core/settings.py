@@ -143,7 +143,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # This is where Django will "collect" files for production
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR,'tournament', 'staticfiles')
+
+STATICFILES_DIRS = [
+    # This joins your root (core) with the tournament/static folder
+    BASE_DIR / "tournament" / "static",
+]
 
 # Optimization: Compresses and caches files for better performance
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
