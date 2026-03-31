@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse, HttpResponse, Http404
 from django.contrib import messages
 from django.db import transaction
+from django.urls import reverse
 from tournament.middlewares import auth, guest, staff
 from store.models import Product, CartItem, Order, OrderItem
 from django.contrib.auth.decorators import login_required
@@ -60,23 +61,22 @@ def add_to_cart(request, product_id):
         quantity = int(request.POST.get("quantity", 1))
 
         if quantity > product.stock:
-            
+            messages.error(request, "Not enough stock available.")
             return redirect("view_cart")
 
-        with transaction.atomic():
-            product.stock -= quantity
-            product.save()
+        # Removed product stock deduction from here so abandoned carts don't permanently reserve stock
+        cart_item, created = CartItem.objects.get_or_create(
+            user=request.user,
+            product=product,
+            size=size,
+            defaults={"quantity": quantity},
+        )
 
-            cart_item, created = CartItem.objects.get_or_create(
-                user=request.user,
-                product=product,
-                size=size,
-                defaults={"quantity": quantity},
-            )
-
-            if not created:
-                cart_item.quantity += quantity
-                cart_item.save()
+        if not created:
+            cart_item.quantity += quantity
+            cart_item.save()
+            
+        messages.success(request, f"{product.name} added to cart.")
 
         return redirect("view_cart")
 
@@ -163,10 +163,13 @@ def checkout_view(request):
 @transaction.atomic()
 def initiate_payment(request, order_id):
     order = get_object_or_404(Order, id=order_id, user=request.user)
+    
+    return_url = request.build_absolute_uri(reverse("verify_payment"))
+    website_url = request.build_absolute_uri("/")
 
     payload = {
-        "return_url": "http://localhost:8000/store/payment/verify/",
-        "website_url": "http://localhost:8000/",
+        "return_url": return_url,
+        "website_url": website_url,
         "amount": int(order.total_amount * 100),
         "purchase_order_id": str(order.id),
         "purchase_order_name": "Jersey Order",
@@ -181,11 +184,19 @@ def initiate_payment(request, order_id):
         "Authorization": f"Key {settings.KHALTI_SECRET_KEY}",
         "Content-Type": "application/json",
     }
-
-    response = requests.post(
-        "https://a.khalti.com/api/v2/epayment/initiate/", json=payload, headers=headers
-    )
-    data = response.json()
+    
+    try:
+        response = requests.post(
+            "https://a.khalti.com/api/v2/epayment/initiate/", json=payload, headers=headers
+        )
+        response.raise_for_status()
+        data = response.json()
+    except Exception as e:
+        return render(
+            request,
+            "store/payment_failed.html",
+            {"error": "Failed to connect to Khalti gateway. Please try again."},
+        )
 
     if response.status_code == 200 and data.get("payment_url"):
         return redirect(data["payment_url"])
@@ -212,29 +223,44 @@ def verify_payment(request):
         "Content-Type": "application/json",
     }
 
-    response = requests.post(
-        "https://a.khalti.com/api/v2/epayment/lookup/",
-        json={"pidx": pidx},
-        headers=headers,
-    )
-
-    data = response.json()
+    try:
+        response = requests.post(
+            "https://a.khalti.com/api/v2/epayment/lookup/",
+            json={"pidx": pidx},
+            headers=headers,
+        )
+        response.raise_for_status()
+        data = response.json()
+    except Exception as e:
+        return render(request, "store/payment_failed.html", {
+            "error": "Could not verify payment with Khalti."
+        })
 
     if data.get("status") == "Completed":
         order = get_object_or_404(Order, id=order_id)
-        order.is_paid = True
-        order.khalti_transaction_id = data.get("transaction_id")
-        order.save()
+        
+        if not order.is_paid:
+            order.is_paid = True
+            order.khalti_transaction_id = data.get("transaction_id")
+            order.save()
+            
+            # ✅ Deduct stock only after a successful payment
+            for item in order.items.all():
+                if item.product.stock >= item.quantity:
+                    item.product.stock -= item.quantity
+                else:
+                    item.product.stock = 0
+                item.product.save()
 
-        # ✅ Clear cart only if user is logged in
-        if order.user:
-            CartItem.objects.filter(user=order.user).delete()
+            # ✅ Clear cart only if user is logged in
+            if order.user:
+                CartItem.objects.filter(user=order.user).delete()
 
 
         return render(request, "store/payment_success.html", {"order": order})
 
     return render(request, "store/payment_failed.html", {
-        "error": data.get("message", "Payment Failed."),
+        "error": data.get("message", "Payment Failed. Your transaction was not completed."),
     })
     
     
@@ -258,4 +284,3 @@ def download_receipt(request, order_id):
         return HttpResponse("PDF generation failed", status=500)
 
     return response
-

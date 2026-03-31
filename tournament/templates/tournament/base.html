@@ -28,8 +28,8 @@
 
         <ul>
             <li><a href="{% url 'homepage' %}">Home</a></li>
+            {% if user.is_staff %}
             <li>
-                {% if user.is_staff %}
                 <div class="dropdown">
                     <a>Squad</a>
                     <div class="dropdown-content">
@@ -42,6 +42,8 @@
                         </ol>
                     </div>
                 </div>
+            </li>
+            <li>
                 <div class="dropdown">
                     <a>Coach</a>
                     <div class="dropdown-content">
@@ -54,28 +56,28 @@
                             <br>
                         </ol>
                     </div>
-                    {% else %}
-                    <li><a href="{% url 'playerlist' %}">Players</a></li>
-                    <br>
-                    <li><a href="{% url 'coach' %}">Coach</a></li>
-                    <br>
-                    <li><a href="{% url 'view_cart' %}">Cart</a></li>
-                    {% endif %}
                 </div>
             </li>
+            {% else %}
+            <li><a href="{% url 'playerlist' %}">Players</a></li>
+            <li><a href="{% url 'coach' %}">Coach</a></li>
+            <li><a href="{% url 'view_cart' %}">Cart</a></li>
+            {% endif %}
             <li><a href="{% url 'upcoming_matches' %}">Matchbook</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
-            <div class="dropdown">
-                <li><a>Gallery</a></li>
-                <div class="dropdown-content">
-                    <ol class="custom-list">
-                        <li><a href="{% url 'gallery1' %}">2023</a></li>
-                        <br>
-                        <li><a href="{% url 'gallery'%}">2024</a></li>
-                        <br>
-                    </ol>
+            <li>
+                <div class="dropdown">
+                    <a>Gallery</a>
+                    <div class="dropdown-content">
+                        <ol class="custom-list">
+                            <li><a href="{% url 'gallery1' %}">2023</a></li>
+                            <br>
+                            <li><a href="{% url 'gallery'%}">2024</a></li>
+                            <br>
+                        </ol>
+                    </div>
                 </div>
-            </div>
+            </li>
             <li><a href="{% url 'contact' %}">Reach Us</a></li>
             {% if user.is_staff %}
             <li><a href="{% url 'product_list' %}">StoreControl</a></li>
@@ -101,7 +103,7 @@
                     <div class="text">Logout</div>
                 </a>
 
-            <li>
+            </li>
         </ul>
     </nav>
 </header>

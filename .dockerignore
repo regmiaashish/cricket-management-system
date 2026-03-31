@@ -1,0 +1,30 @@
+# Python and Virtual Environment
+env/
+venv/
+.env
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+
+# SQLite Database
+db.sqlite3
+
+# Git
+.git/
+.gitignore
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Project specific
+media/
+staticfiles/
+test_routes.py
+test_urls.py
+test_khalti.py
+test_requests.py

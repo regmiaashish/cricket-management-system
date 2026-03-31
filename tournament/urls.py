@@ -14,9 +14,9 @@ urlpatterns = [
      path('player/', playerlist, name='playerlist'),
      path("player/manage/", manage_player, name="manageplayer"),
      path('player/add/', add_player, name='add_player'), #C
-     path('player/view/<id>', view_player, name='view_player'), #R
-     path("player/edit/<id>", edit_player, name="editplayer"), #U
-     path("player/delete/<id>", delete_player, name="deleteplayer"), #D
+     path('player/view/<id>/', view_player, name='view_player'), #R
+     path("player/edit/<id>/", edit_player, name="editplayer"), #U
+     path("player/delete/<id>/", delete_player, name="deleteplayer"), #D
      
      #for inquiry and contact
      path('contact/', reachus, name='contact'),
@@ -29,9 +29,9 @@ urlpatterns = [
      path('coach/', coachview, name='coachlist'),
      path('coachview/', coachlist, name='coach'),
      path('coach/add/', add_coach, name='add_coach'),#C
-     path('coach/view/<id>', view_coach, name='view_coach'),#R
-     path('coach/edit/<id>', edit_coach, name='edit_coach'),#U
-     path('coach/delete/<id>', delete_coach, name='delete_coach'),#D
+     path('coach/view/<id>/', view_coach, name='view_coach'),#R
+     path('coach/edit/<id>/', edit_coach, name='edit_coach'),#U
+     path('coach/delete/<id>/', delete_coach, name='delete_coach'),#D
      
      ## for match
      path('upcoming/', upcoming_matches_view, name='upcoming_matches'),
